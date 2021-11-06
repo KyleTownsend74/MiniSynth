@@ -1,14 +1,19 @@
 #keyboard {
-    /* Sizing determined by size of natural note */
-    width: fit-content;
+    width: 840px;
+    height: 160px;
     border: 4px solid brown;
     position: relative;
     overflow: hidden;
 }
 
 .natural {
-    width: 40px;
-    height: 160px;
+    /* Width of each natural key is 4.76% of
+        the width of the keyboard (because there
+        are 21 natural notes on the keyboard and
+        1 / 21 = 4.76) with 1px subtracted from
+        each key to account for border */
+    width: calc(4.76% - 1px);
+    height: 100%;
     border-right: 1px solid black;
     float: left;
     position: relative;
