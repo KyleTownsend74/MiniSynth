@@ -11,13 +11,10 @@ function setKeyboardListeners() {
     const keys = keyboard.querySelectorAll(".note");
 
     // Set listeners on each key on keyboard
-    for(key of keys) {
-        // Get note value of current key in loop
-        const curNote = key.dataset.note;
-
+    for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
             // Play note associated with key
-            osc1.frequency.value = curNote;
+            osc1.frequency.value = key.dataset.note;
             osc1.start();
             event.stopPropagation();
         });
