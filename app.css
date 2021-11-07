@@ -22,8 +22,16 @@
 .sharp {
     width: 50%;
     height: 70%;
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(78, 78, 78);
     position: absolute;
     left: 75%;
     z-index: 1;
+}
+
+.natural.pressed {
+    background-color: rgb(223, 223, 223);
+}
+
+.sharp.pressed {
+    background-color: black;
 }

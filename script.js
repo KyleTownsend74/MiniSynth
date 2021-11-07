@@ -16,14 +16,17 @@ function setKeyboardListeners() {
             // Play note associated with key
             osc1.frequency.value = key.dataset.note;
             osc1.start();
+            key.classList.add("pressed");
             event.stopPropagation();
         });
 
         key.addEventListener("mouseup", () => {
+            key.classList.remove("pressed");
             osc1.stop();
         });
 
         key.addEventListener("mouseleave", () => {
+            key.classList.remove("pressed");
             osc1.stop();
         });
     }
