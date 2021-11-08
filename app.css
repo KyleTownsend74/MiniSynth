@@ -35,3 +35,34 @@
 .sharp.pressed {
     background-color: black;
 }
+
+.knob {
+    width: fit-content;
+    display: inline-block;
+}
+
+.knob-graphics {
+    width: 75px;
+    height: 75px;
+    background-color: black;
+    margin: 10px;
+    border-radius: 50%;
+    border: 6px solid rgb(131, 131, 131);
+}
+
+.knob-graphics div {
+    width: 5px;
+    height: 5px;
+    background-color: antiquewhite;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.knob-button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.knob-button {
+    font-size: 30px;
+}

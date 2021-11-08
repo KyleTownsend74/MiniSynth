@@ -31,3 +31,58 @@ function setKeyboardListeners() {
         });
     }
 }
+
+// Represents a knob in document with reference to the element and current rotation
+class Knob {
+    constructor(element, curRotation) {
+        this.element = element;
+        this.curRotation = curRotation;
+    }
+}
+
+setKnobListeners();
+
+// Set up event listeners for knob controllers
+function setKnobListeners() {
+    const knobs = createKnobObjects();
+
+    // Set listeners on each knob in document
+    for(let knob of knobs) {
+        // Get necessary subelements of each knob element
+        const graphics = knob.element.querySelector(".knob-graphics");
+        const downButton = knob.element.querySelector(".button-down");
+        const upButton = knob.element.querySelector(".button-up");
+
+        // Rotate knob left by 10 degrees
+        downButton.addEventListener("mousedown", () => {
+            // Get the new rotation (without passing -130 degrees)
+            const newRotation = Math.max(-130, knob.curRotation - 10);
+
+            // Update the rotation
+            graphics.style.transform = `rotate(${newRotation}deg)`;
+            knob.curRotation = newRotation;
+        });
+
+        // Rotate knob right by 10 degrees
+        upButton.addEventListener("mousedown", () => {
+            // Get the new rotation (without passing 130 degrees)
+            const newRotation = Math.min(130, knob.curRotation + 10);
+
+            // Update the rotation
+            graphics.style.transform = `rotate(${newRotation}deg)`;
+            knob.curRotation = newRotation;
+        });
+    }
+}
+
+// Create array of Knob objects from all knobs in document
+function createKnobObjects() {
+    const knobArray = [];
+    const knobElements = document.querySelectorAll(".knob");
+
+    for(let knobElement of knobElements) {
+        knobArray.push(new Knob(knobElement, 0));
+    }
+
+    return knobArray;
+}
