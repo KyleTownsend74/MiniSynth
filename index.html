@@ -11,15 +11,44 @@
 </head>
 <body ondragstart="return false;">
 
-    <div class="knob">
-        <div class="knob-graphics">
-            <div></div>
-        </div>
-        <div class="knob-button-container">
-            <button class="knob-button button-down">&ltrif;</button>
-            <button class="knob-button button-up">&rtrif;</button>
-        </div>
-    </div>
+    <section id="modifiers">
+        <h2>Modifiers</h2>
+        <section id="loudness-contour">
+            <h3>Loudness Contour</h3>
+            <div class="knob" id="amp-attack">
+                <h4>Attack Time</h4>
+                <div class="knob-graphics">
+                    <div></div>
+                </div>
+                <div class="knob-button-container">
+                    <button class="knob-button button-down">&ltrif;</button>
+                    <button class="knob-button button-up">&rtrif;</button>
+                </div>
+            </div>
+
+            <div class="knob" id="amp-decay">
+                <h4>Decay Time</h4>
+                <div class="knob-graphics">
+                    <div></div>
+                </div>
+                <div class="knob-button-container">
+                    <button class="knob-button button-down">&ltrif;</button>
+                    <button class="knob-button button-up">&rtrif;</button>
+                </div>
+            </div>
+
+            <div class="knob" id="amp-sustain">
+                <h4>Sustain Level</h4>
+                <div class="knob-graphics">
+                    <div></div>
+                </div>
+                <div class="knob-button-container">
+                    <button class="knob-button button-down">&ltrif;</button>
+                    <button class="knob-button button-up">&rtrif;</button>
+                </div>
+            </div>
+        </section>
+    </section>
 
     <div class="container" id="keyboard">
         <div class="note natural" data-note="C3">
