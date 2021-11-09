@@ -1,5 +1,7 @@
 const keyboard = document.querySelector("#keyboard");
 const osc1 = new Tone.Oscillator();
+const osc2 = new Tone.Oscillator();
+const osc3 = new Tone.Oscillator();
 const ampEnv = new Tone.AmplitudeEnvelope({
     attack: 0,
     decay: 0,
@@ -8,7 +10,11 @@ const ampEnv = new Tone.AmplitudeEnvelope({
 }).toDestination();
 
 osc1.type = "sine";
+osc2.type = "sine";
+osc3.type = "sine";
 osc1.connect(ampEnv);
+osc2.connect(ampEnv);
+osc3.connect(ampEnv);
 
 setKeyboardListeners();
 
@@ -22,8 +28,12 @@ function setKeyboardListeners() {
         key.addEventListener("mousedown", (event) => {
             // Play note associated with key
             osc1.frequency.value = key.dataset.note;
+            osc2.frequency.value = key.dataset.note;
+            osc3.frequency.value = key.dataset.note;
             if(osc1.state === "stopped") {
                 osc1.start();
+                osc2.start();
+                osc3.start();
             }
             ampEnv.triggerAttack();
             key.classList.add("pressed");
