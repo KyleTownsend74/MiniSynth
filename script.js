@@ -114,24 +114,45 @@ function createKnobObjects() {
 
         // Use knob ID to determine what values each knob will use
         switch(knobElement.id) {
+            case "osc1-volume":
+                actionFunction = function() {
+                    // Set volume based on knob (range -60 - 0)
+                    osc1.volume.value = ((this.curRotation - 130) / 260) * 60;
+                }
+                defaultRotation = 130;
+                break;
+            case "osc2-volume":
+                actionFunction = function() {
+                    // Set volume based on knob (range -60 - 0)
+                    osc2.volume.value = ((this.curRotation - 130) / 260) * 60;
+                }
+                defaultRotation = 130;
+                break;
+            case "osc3-volume":
+                actionFunction = function() {
+                    // Set volume based on knob (range -60 - 0)
+                    osc3.volume.value = ((this.curRotation - 130) / 260) * 60;
+                }
+                defaultRotation = 130;
+                break;
             case "amp-attack":
                 actionFunction = function() {
                     // Set attack based on knob (range 0 - 2)
-                    ampEnv.attack = (this.curRotation + 130) / 130
+                    ampEnv.attack = (this.curRotation + 130) / 130;
                 }
                 defaultRotation = -130;
                 break;
             case "amp-decay":
                 actionFunction = function() {
                     // Set decay based on knob (range 0 - 2)
-                    ampEnv.decay = (this.curRotation + 130) / 130
+                    ampEnv.decay = (this.curRotation + 130) / 130;
                 }
                 defaultRotation = -130;
                 break;
             case "amp-sustain":
                 actionFunction = function() {
                     // Set sustain based on knob (range 0 - 1)
-                    ampEnv.sustain = (this.curRotation + 130) / 260
+                    ampEnv.sustain = (this.curRotation + 130) / 260;
                 }
                 defaultRotation = 130;
                 break;
