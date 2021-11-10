@@ -52,12 +52,19 @@ function setKeyboardListeners() {
     }
 }
 
-// Represents a knob in document with reference to the element and current rotation
-class Knob {
-    constructor(element, curRotation, action) {
+// Represents a general input on the synthesizer - use specific subclasses instead
+class Input {
+    constructor(element, action) {
         this.element = element;
-        this.curRotation = curRotation;
         this.action = action;
+    }
+}
+
+// Represents a knob in document with reference to the element and current rotation
+class Knob extends Input{
+    constructor(element, action, curRotation) {
+        super(element, action);
+        this.curRotation = curRotation;
     }
 }
 
@@ -164,7 +171,7 @@ function createKnobObjects() {
         }
 
         // Create and add knob to array to be returned
-        knobArray.push(new Knob(knobElement, defaultRotation, actionFunction));
+        knobArray.push(new Knob(knobElement, actionFunction, defaultRotation));
 
         // Set initial knob rotation
         knobElement.querySelector(".knob-graphics").style.transform = `rotate(${defaultRotation}deg)`;
