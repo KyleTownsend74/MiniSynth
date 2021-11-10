@@ -60,7 +60,7 @@ class Input {
     }
 }
 
-// Represents a knob in document with reference to the element and current rotation
+// Represents a knob in document with current rotation
 class Knob extends Input{
     constructor(element, action, curRotation) {
         super(element, action);
@@ -178,4 +178,77 @@ function createKnobObjects() {
     }
 
     return knobArray;
+}
+
+// Represents a checkbox in document with checked value
+class Checkbox extends Input {
+    constructor(element, action, isChecked) {
+        super(element, action);
+        this.isChecked = isChecked;
+    }
+}
+
+setCheckboxListeners();
+
+// Set up event listeners for checkboxes
+function setCheckboxListeners() {
+    const checkboxes = createCheckboxObjects();
+
+    // Set listeners on each checkbox in document
+    for(let checkbox of checkboxes) {
+        const element = checkbox.element;
+
+        element.addEventListener("change", () => {
+            // If check has changed, take the action on the checkbox and update isChecked
+            if(element.checked !== checkbox.isChecked) {
+                checkbox.action();
+                checkbox.isChecked = element.checked;
+            }
+        });
+    }
+}
+
+// Create array of Checkbox objects from all checkboxes in document
+function createCheckboxObjects() {
+    const checkboxArray = [];
+    const checkboxElements = document.querySelectorAll("input[type=checkbox]");
+
+    for(let checkboxElement of checkboxElements) {
+        // Declare variables to construct checkbox
+        let defaultValue;
+        let actionFunction;
+
+        // Use checkbox ID to determine what values each checkbox will use
+        switch(checkboxElement.id) {
+            case "osc1-enabled":
+                actionFunction = function() {
+                    // Toggle osc1 mute
+                    osc1.mute = !osc1.mute;
+                }
+                defaultValue = true;
+                break;
+            case "osc2-enabled":
+                actionFunction = function() {
+                    // Toggle osc1 mute
+                    osc2.mute = !osc2.mute;
+                }
+                defaultValue = true;
+                break;
+            case "osc3-enabled":
+                actionFunction = function() {
+                    // Toggle osc1 mute
+                    osc3.mute = !osc3.mute;
+                }
+                defaultValue = true;
+                break;
+        }
+
+        // Create and add checkbox to array to be returned
+        checkboxArray.push(new Checkbox(checkboxElement, actionFunction, defaultValue));
+
+        // Set initial checkbox value
+        checkboxElement.checked = defaultValue;
+    }
+
+    return checkboxArray;
 }
