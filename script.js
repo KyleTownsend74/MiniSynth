@@ -1,4 +1,5 @@
 const keyboard = document.querySelector("#keyboard");
+const baseOctaveNum = 3;
 const osc1 = new Tone.Oscillator();
 const osc2 = new Tone.Oscillator();
 const osc3 = new Tone.Oscillator();
@@ -27,9 +28,9 @@ function setKeyboardListeners() {
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
             // Play note associated with key
-            osc1.frequency.value = key.dataset.note;
-            osc2.frequency.value = key.dataset.note;
-            osc3.frequency.value = key.dataset.note;
+            osc2.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
+            osc3.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
+            osc1.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
             if(osc1.state === "stopped") {
                 osc1.start();
                 osc2.start();
