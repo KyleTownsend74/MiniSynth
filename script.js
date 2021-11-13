@@ -241,6 +241,11 @@ function createCheckboxObjects() {
                 }
                 defaultValue = true;
                 break;
+            default:
+                actionFunction = function() {
+                    console.log("Checkbox function not set");
+                }
+                defaultValue = false;
         }
 
         // Create and add checkbox to array to be returned
