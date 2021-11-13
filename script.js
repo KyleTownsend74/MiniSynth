@@ -23,17 +23,27 @@ setKeyboardListeners();
 
 // Set up notes for keyboard controller
 function setKeyboardNotes(lowNoteNum) {
+    // Base notes to add number to in order to get tone
     const baseNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+    // For use in calculations in loop
     const numBaseNotes = baseNotes.length;
     const numKeys = keys.length;
+
+    // Which base note to assign to key
     let baseNoteIndex;
+    // What to add to lowNoteNum to get final tone to assign
     let noteNumAdder;
 
+    // Loop through each key on keyboard, assigning each key a note
     for(let i = 0; i < numKeys; i++) {
+        // Calculate which base note to use - e.g. (12 + 1) % 12 = 1, use baseNotes[1] = C#
         baseNoteIndex = (numBaseNotes + i) % numBaseNotes;
+        // Calculate what to add to lowNoteNum to determine octave - e.g. Math.floor(14 / 12) = 1
+        // so then add 1 to lowNoteNum, which would be in the second octave after lowNoteNum
         noteNumAdder = Math.floor(i / numBaseNotes);
+        // Set note of key
         keys[i].setAttribute("data-note", baseNotes[baseNoteIndex] + (noteNumAdder + lowNoteNum));
-        //console.log(baseNotes[baseNoteIndex] + (noteNumAdder + lowNoteNum));
     }
 }
 
