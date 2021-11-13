@@ -1,4 +1,3 @@
-const keyboard = document.querySelector("#keyboard");
 const osc1 = new Tone.Oscillator();
 const osc2 = new Tone.Oscillator();
 const osc3 = new Tone.Oscillator();
@@ -16,13 +15,30 @@ osc1.connect(ampEnv);
 osc2.connect(ampEnv);
 osc3.connect(ampEnv);
 
+// Get all keys on keyboard
+const keys = document.querySelector("#keyboard").querySelectorAll(".note");
+
+setKeyboardNotes(3);
 setKeyboardListeners();
+
+// Set up notes for keyboard controller
+function setKeyboardNotes(lowNoteNum) {
+    const baseNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const numBaseNotes = baseNotes.length;
+    const numKeys = keys.length;
+    let baseNoteIndex;
+    let noteNumAdder;
+
+    for(let i = 0; i < numKeys; i++) {
+        baseNoteIndex = (numBaseNotes + i) % numBaseNotes;
+        noteNumAdder = Math.floor(i / numBaseNotes);
+        keys[i].setAttribute("data-note", baseNotes[baseNoteIndex] + (noteNumAdder + lowNoteNum));
+        //console.log(baseNotes[baseNoteIndex] + (noteNumAdder + lowNoteNum));
+    }
+}
 
 // Set up event listeners for keyboard controller
 function setKeyboardListeners() {
-    // Get all keys on keyboard
-    const keys = keyboard.querySelectorAll(".note");
-
     // Set listeners on each key on keyboard
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
