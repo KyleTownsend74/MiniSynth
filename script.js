@@ -1,3 +1,4 @@
+const keyboard = document.querySelector("#keyboard");
 const osc1 = new Tone.Oscillator();
 const osc2 = new Tone.Oscillator();
 const osc3 = new Tone.Oscillator();
@@ -15,40 +16,13 @@ osc1.connect(ampEnv);
 osc2.connect(ampEnv);
 osc3.connect(ampEnv);
 
-// Get all keys on keyboard
-const keys = document.querySelector("#keyboard").querySelectorAll(".note");
-
-setKeyboardNotes(3);
 setKeyboardListeners();
-
-// Set up notes for keyboard controller
-function setKeyboardNotes(lowNoteNum) {
-    // Base notes to add number to in order to get tone
-    const baseNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
-    // For use in calculations in loop
-    const numBaseNotes = baseNotes.length;
-    const numKeys = keys.length;
-
-    // Which base note to assign to key
-    let baseNoteIndex;
-    // What to add to lowNoteNum to get final tone to assign
-    let noteNumAdder;
-
-    // Loop through each key on keyboard, assigning each key a note
-    for(let i = 0; i < numKeys; i++) {
-        // Calculate which base note to use - e.g. (12 + 1) % 12 = 1, use baseNotes[1] = C#
-        baseNoteIndex = (numBaseNotes + i) % numBaseNotes;
-        // Calculate what to add to lowNoteNum to determine octave - e.g. Math.floor(14 / 12) = 1
-        // so then add 1 to lowNoteNum, which would be in the second octave after lowNoteNum
-        noteNumAdder = Math.floor(i / numBaseNotes);
-        // Set note of key
-        keys[i].setAttribute("data-note", baseNotes[baseNoteIndex] + (noteNumAdder + lowNoteNum));
-    }
-}
 
 // Set up event listeners for keyboard controller
 function setKeyboardListeners() {
+    // Get all keys on keyboard
+    const keys = keyboard.querySelectorAll(".note");
+
     // Set listeners on each key on keyboard
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
