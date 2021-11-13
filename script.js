@@ -9,9 +9,9 @@ const ampEnv = new Tone.AmplitudeEnvelope({
     release: 0.05   // Release at 0.05 to avoid bug and give smoother sound without dedicated knob
 }).toDestination();
 
-osc1.type = "sine";
-osc2.type = "sine";
-osc3.type = "sine";
+osc1.type = document.querySelector("#osc1-waveform").value;
+osc2.type = document.querySelector("#osc2-waveform").value;
+osc3.type = document.querySelector("#osc3-waveform").value;
 osc1.connect(ampEnv);
 osc2.connect(ampEnv);
 osc3.connect(ampEnv);
@@ -251,4 +251,70 @@ function createCheckboxObjects() {
     }
 
     return checkboxArray;
+}
+
+// Represents a select in document - extends from Input for consistency with rest of script
+class Select extends Input {
+    constructor(element, action) {
+        super(element, action);
+    }
+}
+
+setSelectListeners();
+
+// Set up event listeners for selects
+function setSelectListeners() {
+    const selects = createSelectObjects();
+
+    // Set listeners on each select in document
+    for(let select of selects) {
+        const element = select.element;
+
+        element.addEventListener("change", (event) => {
+            // Change waveform
+            select.action(event.target.value);
+        });
+    }
+}
+
+// Create array of Select objects from all selects in document
+function createSelectObjects() {
+    const selectArray = [];
+    const selectElements = document.querySelectorAll("select");
+
+    for(let selectElement of selectElements) {
+        // Declare variable to construct select
+        let actionFunction;
+
+        // Use select ID to determine what values each select will use
+        switch(selectElement.id) {
+            case "osc1-waveform":
+                actionFunction = function(waveType) {
+                    // Set osc1 waveform type
+                    osc1.type = waveType;
+                }
+                break;
+            case "osc2-waveform":
+                actionFunction = function(waveType) {
+                    // Set osc2 waveform type
+                    osc2.type = waveType;
+                }
+                break;
+            case "osc3-waveform":
+                actionFunction = function(waveType) {
+                    // Set osc3 waveform type
+                    osc3.type = waveType;
+                }
+                break;
+            default:
+                actionFunction = function() {
+                    console.log("Select function not set");
+                }
+        }
+
+        // Create and add Selects to array to be returned
+        selectArray.push(new Select(selectElement, actionFunction));
+    }
+
+    return selectArray;
 }
