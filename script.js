@@ -10,6 +10,11 @@ const ampEnv = new Tone.AmplitudeEnvelope({
     release: 0.05   // Release at 0.05 to avoid bug and give smoother sound without dedicated knob
 }).toDestination();
 
+// Offset for note range of each oscillator
+let osc1RangeOffset = 0;
+let osc2RangeOffset = 0;
+let osc3RangeOffset = 0;
+
 osc1.type = document.querySelector("#osc1-waveform").value;
 osc2.type = document.querySelector("#osc2-waveform").value;
 osc3.type = document.querySelector("#osc3-waveform").value;
@@ -28,9 +33,12 @@ function setKeyboardListeners() {
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
             // Play note associated with key
-            osc2.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
-            osc3.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
-            osc1.frequency.value = key.dataset.note + (baseOctaveNum + parseInt(key.dataset.octave));
+            osc1.frequency.value = key.dataset.note 
+                + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
+            osc2.frequency.value = key.dataset.note 
+                + (baseOctaveNum + osc2RangeOffset + parseInt(key.dataset.octave));
+            osc3.frequency.value = key.dataset.note 
+                + (baseOctaveNum + osc3RangeOffset + parseInt(key.dataset.octave));
             if(osc1.state === "stopped") {
                 osc1.start();
                 osc2.start();
@@ -312,6 +320,30 @@ function createSelectObjects() {
                     osc3.type = waveType;
                 }
                 break;
+            case "osc1-range":
+                actionFunction = function(range) {
+                    // Set osc1 range
+                    osc1RangeOffset = determineRangeOffset(range);
+                }
+                // Set default selected
+                selectElement.value = "middle";
+                break;
+            case "osc2-range":
+                actionFunction = function(range) {
+                    // Set osc2 range
+                    osc2RangeOffset = determineRangeOffset(range);
+                }
+                // Set default selected
+                selectElement.value = "middle";
+                break;
+            case "osc3-range":
+                actionFunction = function(range) {
+                    // Set osc3 range
+                    osc3RangeOffset = determineRangeOffset(range);
+                }
+                // Set default selected
+                selectElement.value = "middle";
+                break;
             default:
                 actionFunction = function() {
                     console.log("Select function not set");
@@ -323,4 +355,26 @@ function createSelectObjects() {
     }
 
     return selectArray;
+}
+
+// Determine offset value from range string value
+function determineRangeOffset(range) {
+    let rangeInt;
+
+    switch(range) {
+        case "low":
+            rangeInt = -1;
+            break;
+        case "middle":
+            rangeInt = 0;
+            break;
+        case "high":
+            rangeInt = 1;
+            break;
+        default:
+            rangeInt = 0;
+            console.log("Unknown range");
+    }
+
+    return rangeInt;
 }
