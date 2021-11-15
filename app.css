@@ -1,3 +1,11 @@
+html {
+    font-family: "Reem Kufi", sans-serif;
+}
+
+select {
+    font-family: "Reem Kufi", sans-serif;
+}
+
 #keyboard {
     width: 840px;
     height: 160px;
