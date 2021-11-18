@@ -1,17 +1,31 @@
 html {
     font-family: "Reem Kufi", sans-serif;
+    color: white;
+    background-color: burlywood;
+}
+
+body {
+    background-color: black;
+    margin: 20px;
+    padding: 13px 0 0;
 }
 
 select {
     font-family: "Reem Kufi", sans-serif;
+    background-color: black;
+    color: white;
+    border: 2px solid antiquewhite;
+    border-radius: 0.4em;
+    padding: 0.1em;
 }
 
 #keyboard {
     width: 840px;
     height: 160px;
-    border: 4px solid brown;
+    border: 4px solid saddlebrown;
     position: relative;
     overflow: hidden;
+    margin: 30px auto 0px;
 }
 
 .natural {
@@ -22,6 +36,7 @@ select {
         each key to account for border */
     width: calc(4.76% - 1px);
     height: 100%;
+    background-color: white;
     border-right: 1px solid black;
     float: left;
     position: relative;
@@ -53,7 +68,7 @@ select {
     width: 75px;
     height: 75px;
     background-color: black;
-    margin: 10px;
+    margin: 0 auto;
     border-radius: 50%;
     border: 6px solid rgb(131, 131, 131);
 }
@@ -68,9 +83,49 @@ select {
 
 .knob-button-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    margin: 13px 0;
 }
 
 .knob-button {
+    background-color: black;
+    color: antiquewhite;
     font-size: 30px;
+    border-radius: 0.25em;
+    border: 2px solid antiquewhite;
+    transition: color 0.5s, border-color 0.3s;
+    margin: 0 5px;
+}
+
+.knob-button:hover {
+    color: white;
+    border-color: white;
+}
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 4%;
+}
+
+section.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+section h2 {
+    text-align: center;
+}
+
+section h2:first-of-type {
+    margin-top: 0;
+}
+
+div.separator {
+    background-color: antiquewhite;
+    width: 65%;
+    height: 3px;
+    margin: 40px auto 20px;
 }

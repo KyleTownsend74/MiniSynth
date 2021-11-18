@@ -18,134 +18,160 @@
     <section id="oscillator-bank">
         <h2>Oscillator Bank</h2>
 
-        <h4>Oscillator 1</h4>
-        <label for="osc1-waveform">Waveform</label>
-        <select id="osc1-waveform">
-            <option value="triangle">Triangle</option>
-            <option value="sawtooth">Sawtooth</option>
-            <option value="square">Square</option>
-        </select>
-        <label for="osc1-range">Range</label>
-        <select id="osc1-range">
-            <option value="low">Low</option>
-            <option value="middle">Middle</option>
-            <option value="high">High</option>
-        </select>
+        <section class="content">
+            <div class="container">
+                <h4>Oscillator 1</h4>
+                <label for="osc1-waveform">Waveform</label>
+                <select id="osc1-waveform">
+                    <option value="triangle">Triangle</option>
+                    <option value="sawtooth">Sawtooth</option>
+                    <option value="square">Square</option>
+                </select>
+                <label for="osc1-range">Range</label>
+                <select id="osc1-range">
+                    <option value="low">Low</option>
+                    <option value="middle">Middle</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
 
-        <h4>Oscillator 2</h4>
-        <label for="osc2-waveform">Waveform</label>
-        <select id="osc2-waveform">
-            <option value="triangle">Triangle</option>
-            <option value="sawtooth">Sawtooth</option>
-            <option value="square">Square</option>
-        </select>
-        <label for="osc2-range">Range</label>
-        <select id="osc2-range">
-            <option value="low">Low</option>
-            <option value="middle">Middle</option>
-            <option value="high">High</option>
-        </select>
+            <div class="container">
+                <h4>Oscillator 2</h4>
+                <label for="osc2-waveform">Waveform</label>
+                <select id="osc2-waveform">
+                    <option value="triangle">Triangle</option>
+                    <option value="sawtooth">Sawtooth</option>
+                    <option value="square">Square</option>
+                </select>
+                <label for="osc2-range">Range</label>
+                <select id="osc2-range">
+                    <option value="low">Low</option>
+                    <option value="middle">Middle</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
 
-        <h4>Oscillator 3</h4>
-        <label for="osc3-waveform">Waveform</label>
-        <select id="osc3-waveform">
-            <option value="triangle">Triangle</option>
-            <option value="sawtooth">Sawtooth</option>
-            <option value="square">Square</option>
-        </select>
-        <label for="osc3-range">Range</label>
-        <select id="osc3-range">
-            <option value="low">Low</option>
-            <option value="middle">Middle</option>
-            <option value="high">High</option>
-        </select>
+            <div class="container">
+                <h4>Oscillator 3</h4>
+                <label for="osc3-waveform">Waveform</label>
+                <select id="osc3-waveform">
+                    <option value="triangle">Triangle</option>
+                    <option value="sawtooth">Sawtooth</option>
+                    <option value="square">Square</option>
+                </select>
+                <label for="osc3-range">Range</label>
+                <select id="osc3-range">
+                    <option value="low">Low</option>
+                    <option value="middle">Middle</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+        </section>
     </section>
+
+    <div class="separator"></div>
 
     <section id="mixer">
         <h2>Mixer</h2>
-        <div class="knob" id="osc1-volume">
-            <h4>Oscillator 1 Volume</h4>
-            <div class="knob-graphics">
-                <div></div>
-            </div>
-            <div class="knob-button-container">
-                <button class="knob-button button-down">&ltrif;</button>
-                <button class="knob-button button-up">&rtrif;</button>
-            </div>
-        </div>
 
-        <label for="osc1-enabled">Oscillator 1 Enabled</label>
-        <input type="checkbox" id="osc1-enabled">
-
-        <div class="knob" id="osc2-volume">
-            <h4>Oscillator 2 Volume</h4>
-            <div class="knob-graphics">
-                <div></div>
-            </div>
-            <div class="knob-button-container">
-                <button class="knob-button button-down">&ltrif;</button>
-                <button class="knob-button button-up">&rtrif;</button>
-            </div>
-        </div>
-
-        <label for="osc2-enabled">Oscillator 2 Enabled</label>
-        <input type="checkbox" id="osc2-enabled">
-
-        <div class="knob" id="osc3-volume">
-            <h4>Oscillator 3 Volume</h4>
-            <div class="knob-graphics">
-                <div></div>
-            </div>
-            <div class="knob-button-container">
-                <button class="knob-button button-down">&ltrif;</button>
-                <button class="knob-button button-up">&rtrif;</button>
-            </div>
-        </div>
-
-        <label for="osc3-enabled">Oscillator 3 Enabled</label>
-        <input type="checkbox" id="osc3-enabled">
-    </section>
-
-    <section id="modifiers">
-        <h2>Modifiers</h2>
-        <section id="loudness-contour">
-            <h3>Loudness Contour</h3>
-            <div class="knob" id="amp-attack">
-                <h4>Attack Time</h4>
-                <div class="knob-graphics">
-                    <div></div>
+        <section class="content">
+            <div class="container">
+                <div class="knob" id="osc1-volume">
+                    <h4>Oscillator 1 Volume</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
                 </div>
-                <div class="knob-button-container">
-                    <button class="knob-button button-down">&ltrif;</button>
-                    <button class="knob-button button-up">&rtrif;</button>
+                <div>
+                    <label for="osc1-enabled">Oscillator 1 Enabled</label>
+                    <input type="checkbox" id="osc1-enabled">
                 </div>
             </div>
-
-            <div class="knob" id="amp-decay">
-                <h4>Decay Time</h4>
-                <div class="knob-graphics">
-                    <div></div>
+            <div class="container">
+                <div class="knob" id="osc2-volume">
+                    <h4>Oscillator 2 Volume</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
                 </div>
-                <div class="knob-button-container">
-                    <button class="knob-button button-down">&ltrif;</button>
-                    <button class="knob-button button-up">&rtrif;</button>
+                <div>
+                    <label for="osc2-enabled">Oscillator 2 Enabled</label>
+                    <input type="checkbox" id="osc2-enabled">
                 </div>
             </div>
-
-            <div class="knob" id="amp-sustain">
-                <h4>Sustain Level</h4>
-                <div class="knob-graphics">
-                    <div></div>
+            <div class="container">
+                <div class="knob" id="osc3-volume">
+                    <h4>Oscillator 3 Volume</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
                 </div>
-                <div class="knob-button-container">
-                    <button class="knob-button button-down">&ltrif;</button>
-                    <button class="knob-button button-up">&rtrif;</button>
+                <div>
+                    <label for="osc3-enabled">Oscillator 3 Enabled</label>
+                    <input type="checkbox" id="osc3-enabled">
                 </div>
             </div>
         </section>
     </section>
 
-    <div class="container" id="keyboard">
+    <div class="separator"></div>
+
+    <section id="modifiers">
+        <h2>Loudness Contour</h2>
+
+        <section class="content">
+            <div class="container">
+                <div class="knob" id="amp-attack">
+                    <h4>Attack Time</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="knob" id="amp-decay">
+                    <h4>Decay Time</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="knob" id="amp-sustain">
+                    <h4>Sustain Level</h4>
+                    <div class="knob-graphics">
+                        <div></div>
+                    </div>
+                    <div class="knob-button-container">
+                        <button class="knob-button button-down">&ltrif;</button>
+                        <button class="knob-button button-up">&rtrif;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <div id="keyboard">
         <div class="note natural" data-note="C" data-octave="0">
             <div class="note sharp" data-note="C#" data-octave="0"></div>
         </div>
