@@ -5,7 +5,7 @@ const osc2 = new Tone.Oscillator();
 const osc3 = new Tone.Oscillator();
 const ampEnv = new Tone.AmplitudeEnvelope({
     attack: 0,
-    decay: 0,
+    decay: 0.01,    // Default at 0.01 to ensure decay activates when knob is fully down
     sustain: 1,
     release: 0.05   // Release at 0.05 to avoid bug and give smoother sound without dedicated knob
 }).toDestination();
@@ -183,7 +183,7 @@ function createKnobObjects() {
             case "amp-decay":
                 actionFunction = function() {
                     // Set decay based on knob (range 0 - 2)
-                    ampEnv.decay = (this.curRotation + 130) / 130;
+                    ampEnv.decay = Math.max(((this.curRotation + 130) / 130), 0.01);
                 }
                 defaultRotation = -130;
                 break;
