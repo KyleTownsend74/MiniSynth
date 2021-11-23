@@ -101,6 +101,17 @@ function setKnobListeners() {
 
             // Use knob effect
             knob.action();
+
+            // Show pressed styling
+            downButton.classList.add("pressed");
+        });
+
+        downButton.addEventListener("mouseup", () => {
+            downButton.classList.remove("pressed");
+        });
+
+        downButton.addEventListener("mouseleave", () => {
+            downButton.classList.remove("pressed");
         });
 
         // Rotate knob right by 10 degrees
@@ -114,6 +125,17 @@ function setKnobListeners() {
 
             // Use knob effect
             knob.action();
+
+            // Show pressed styling
+            upButton.classList.add("pressed");
+        });
+
+        upButton.addEventListener("mouseup", () => {
+            upButton.classList.remove("pressed");
+        });
+
+        upButton.addEventListener("mouseleave", () => {
+            upButton.classList.remove("pressed");
         });
     }
 }
