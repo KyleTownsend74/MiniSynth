@@ -1,7 +1,7 @@
 html {
     font-family: "Reem Kufi", sans-serif;
     color: white;
-    background-color: burlywood;
+    background-color: rgb(202, 161, 108);
 }
 
 body {
@@ -14,7 +14,7 @@ select {
     font-family: "Reem Kufi", sans-serif;
     background-color: black;
     color: white;
-    border: 2px solid antiquewhite;
+    border: 2px solid rgb(250, 222, 186);
     border-radius: 0.4em;
     padding: 0.1em;
 }
@@ -89,11 +89,11 @@ select {
 
 .knob-button {
     background-color: black;
-    color: antiquewhite;
+    color: rgb(250, 222, 186);
     font-size: 30px;
     border-radius: 0.25em;
-    border: 2px solid antiquewhite;
-    transition: color 0.5s, border-color 0.3s;
+    border: 2px solid rgb(250, 222, 186);
+    transition: color 0.15s ease-out, border-color 0.15s ease-out;
     margin: 0 5px;
 }
 
@@ -103,8 +103,8 @@ select {
 }
 
 .knob-button.pressed {
-    color: rgb(192, 192, 192);
-    border-color: rgb(192, 192, 192);
+    color: rgb(168, 168, 168);
+    border-color: rgb(168, 168, 168);
 }
 
 div.container {
@@ -129,7 +129,7 @@ section h2:first-of-type {
 }
 
 div.separator {
-    background-color: antiquewhite;
+    background-color: rgb(250, 222, 186);
     width: 65%;
     height: 3px;
     margin: 40px auto 20px;
