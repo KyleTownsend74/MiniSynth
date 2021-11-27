@@ -22,7 +22,13 @@ osc1.connect(ampEnv);
 osc2.connect(ampEnv);
 osc3.connect(ampEnv);
 
+let isKeyboardClicked = false;
 setKeyboardListeners();
+
+// When mouse leaves, reset click on keyboard even if the user is holding down the mouse
+keyboard.addEventListener("mouseleave", () => {
+    isKeyboardClicked = false;
+});
 
 // Set up event listeners for keyboard controller
 function setKeyboardListeners() {
@@ -46,15 +52,38 @@ function setKeyboardListeners() {
             }
             ampEnv.triggerAttack();
             key.classList.add("pressed");
+            isKeyboardClicked = true;
             event.stopPropagation();
         });
 
         key.addEventListener("mouseup", () => {
             key.classList.remove("pressed");
             ampEnv.triggerRelease();
+            isKeyboardClicked = false;
         });
 
-        key.addEventListener("mouseleave", () => {
+        key.addEventListener("mouseover", (event) => {
+            // Play note if mousing over a key while holding down the mouse on the keyboard
+            if(isKeyboardClicked) {
+                // Play note associated with key
+                osc1.frequency.value = key.dataset.note 
+                    + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
+                osc2.frequency.value = key.dataset.note 
+                    + (baseOctaveNum + osc2RangeOffset + parseInt(key.dataset.octave));
+                osc3.frequency.value = key.dataset.note 
+                    + (baseOctaveNum + osc3RangeOffset + parseInt(key.dataset.octave));
+                if(osc1.state === "stopped") {
+                    osc1.start();
+                    osc2.start();
+                    osc3.start();
+                }
+                ampEnv.triggerAttack();
+                key.classList.add("pressed");
+                event.stopPropagation();
+            }
+        });
+
+        key.addEventListener("mouseout", () => {
             key.classList.remove("pressed");
             ampEnv.triggerRelease();
         });
