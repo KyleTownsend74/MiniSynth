@@ -30,6 +30,7 @@ keyboard.addEventListener("mouseleave", () => {
     isKeyboardClicked = false;
 });
 
+// Main event to call for pressing keyboard note
 function pressNoteEvent(event, key) {
     event.stopPropagation();
 
@@ -49,6 +50,7 @@ function pressNoteEvent(event, key) {
     key.classList.add("pressed");
 }
 
+// Main event to call when releasing keyboard note
 function releaseNoteEvent(key) {
     key.classList.remove("pressed");
     ampEnv.triggerRelease();
@@ -102,6 +104,33 @@ class Knob extends Input{
 
 setKnobListeners();
 
+// Main event to call when pressing knob button
+function pressKnobEvent(knob, isUp, graphics, button) {
+    // Get the new rotation (without passing -130 degrees)
+    let newRotation;
+    if(isUp) {
+        newRotation = Math.min(130, knob.curRotation + 10);
+    }
+    else {
+        newRotation = Math.max(-130, knob.curRotation - 10);
+    }
+
+    // Update the rotation
+    graphics.style.transform = `rotate(${newRotation}deg)`;
+    knob.curRotation = newRotation;
+
+    // Use knob effect
+    knob.action();
+
+    // Show pressed styling
+    button.classList.add("pressed");
+}
+
+// Main event to call when releasing knob event
+function releaseKnobEvent(button) {
+    button.classList.remove("pressed");
+}
+
 // Set up event listeners for knob controllers
 function setKnobListeners() {
     const knobs = createKnobObjects();
@@ -115,50 +144,28 @@ function setKnobListeners() {
 
         // Rotate knob left by 10 degrees
         downButton.addEventListener("mousedown", () => {
-            // Get the new rotation (without passing -130 degrees)
-            const newRotation = Math.max(-130, knob.curRotation - 10);
-
-            // Update the rotation
-            graphics.style.transform = `rotate(${newRotation}deg)`;
-            knob.curRotation = newRotation;
-
-            // Use knob effect
-            knob.action();
-
-            // Show pressed styling
-            downButton.classList.add("pressed");
+            pressKnobEvent(knob, false, graphics, downButton);
         });
 
         downButton.addEventListener("mouseup", () => {
-            downButton.classList.remove("pressed");
+            releaseKnobEvent(downButton);
         });
 
         downButton.addEventListener("mouseleave", () => {
-            downButton.classList.remove("pressed");
+            releaseKnobEvent(downButton);
         });
 
         // Rotate knob right by 10 degrees
         upButton.addEventListener("mousedown", () => {
-            // Get the new rotation (without passing 130 degrees)
-            const newRotation = Math.min(130, knob.curRotation + 10);
-
-            // Update the rotation
-            graphics.style.transform = `rotate(${newRotation}deg)`;
-            knob.curRotation = newRotation;
-
-            // Use knob effect
-            knob.action();
-
-            // Show pressed styling
-            upButton.classList.add("pressed");
+            pressKnobEvent(knob, true, graphics, upButton);
         });
 
         upButton.addEventListener("mouseup", () => {
-            upButton.classList.remove("pressed");
+            releaseKnobEvent(upButton);
         });
 
         upButton.addEventListener("mouseleave", () => {
-            upButton.classList.remove("pressed");
+            releaseKnobEvent(upButton);
         });
     }
 }
