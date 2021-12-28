@@ -30,6 +30,30 @@ keyboard.addEventListener("mouseleave", () => {
     isKeyboardClicked = false;
 });
 
+function pressNoteEvent(event, key) {
+    event.stopPropagation();
+
+    // Play note associated with key
+    osc1.frequency.value = key.dataset.note 
+        + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
+    osc2.frequency.value = key.dataset.note 
+        + (baseOctaveNum + osc2RangeOffset + parseInt(key.dataset.octave));
+    osc3.frequency.value = key.dataset.note 
+        + (baseOctaveNum + osc3RangeOffset + parseInt(key.dataset.octave));
+    if(osc1.state === "stopped") {
+        osc1.start();
+        osc2.start();
+        osc3.start();
+    }
+    ampEnv.triggerAttack();
+    key.classList.add("pressed");
+}
+
+function releaseNoteEvent(key) {
+    key.classList.remove("pressed");
+    ampEnv.triggerRelease();
+}
+
 // Set up event listeners for keyboard controller
 function setKeyboardListeners() {
     // Get all keys on keyboard
@@ -38,54 +62,24 @@ function setKeyboardListeners() {
     // Set listeners on each key on keyboard
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
-            // Play note associated with key
-            osc1.frequency.value = key.dataset.note 
-                + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
-            osc2.frequency.value = key.dataset.note 
-                + (baseOctaveNum + osc2RangeOffset + parseInt(key.dataset.octave));
-            osc3.frequency.value = key.dataset.note 
-                + (baseOctaveNum + osc3RangeOffset + parseInt(key.dataset.octave));
-            if(osc1.state === "stopped") {
-                osc1.start();
-                osc2.start();
-                osc3.start();
-            }
-            ampEnv.triggerAttack();
-            key.classList.add("pressed");
+            pressNoteEvent(event, key);
             isKeyboardClicked = true;
-            event.stopPropagation();
         });
 
         key.addEventListener("mouseup", () => {
-            key.classList.remove("pressed");
-            ampEnv.triggerRelease();
+            releaseNoteEvent(key);
             isKeyboardClicked = false;
         });
 
         key.addEventListener("mouseover", (event) => {
             // Play note if mousing over a key while holding down the mouse on the keyboard
             if(isKeyboardClicked) {
-                // Play note associated with key
-                osc1.frequency.value = key.dataset.note 
-                    + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
-                osc2.frequency.value = key.dataset.note 
-                    + (baseOctaveNum + osc2RangeOffset + parseInt(key.dataset.octave));
-                osc3.frequency.value = key.dataset.note 
-                    + (baseOctaveNum + osc3RangeOffset + parseInt(key.dataset.octave));
-                if(osc1.state === "stopped") {
-                    osc1.start();
-                    osc2.start();
-                    osc3.start();
-                }
-                ampEnv.triggerAttack();
-                key.classList.add("pressed");
-                event.stopPropagation();
+                pressNoteEvent(event, key);
             }
         });
 
         key.addEventListener("mouseout", () => {
-            key.classList.remove("pressed");
-            ampEnv.triggerRelease();
+            releaseNoteEvent(key);
         });
     }
 }
