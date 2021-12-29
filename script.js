@@ -65,6 +65,10 @@ function setKeyboardListeners() {
 
     // Set listeners on each key on keyboard
     for(let key of keys) {
+        key.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+
         key.addEventListener("mousedown", (event) => {
             if(!isKeyboardClicked) {
                 pressNoteEvent(event, key);
