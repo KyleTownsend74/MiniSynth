@@ -27,7 +27,9 @@ setKeyboardListeners();
 
 // When mouse leaves, reset click on keyboard even if the user is holding down the mouse
 keyboard.addEventListener("mouseleave", () => {
-    isKeyboardClicked = false;
+    if(isKeyboardClicked) {
+        isKeyboardClicked = false;
+    }
 });
 
 // Main event to call for pressing keyboard note
@@ -64,13 +66,17 @@ function setKeyboardListeners() {
     // Set listeners on each key on keyboard
     for(let key of keys) {
         key.addEventListener("mousedown", (event) => {
-            pressNoteEvent(event, key);
-            isKeyboardClicked = true;
+            if(!isKeyboardClicked) {
+                pressNoteEvent(event, key);
+                isKeyboardClicked = true;
+            }
         });
 
-        key.addEventListener("mouseup", () => {
-            releaseNoteEvent(key);
-            isKeyboardClicked = false;
+        key.addEventListener("mouseup", (event) => {
+            if(isKeyboardClicked) {
+                releaseNoteEvent(key);
+                isKeyboardClicked = false;
+            }
         });
 
         key.addEventListener("mouseover", (event) => {
@@ -80,8 +86,10 @@ function setKeyboardListeners() {
             }
         });
 
-        key.addEventListener("mouseout", () => {
-            releaseNoteEvent(key);
+        key.addEventListener("mouseout", (event) => {
+            if(isKeyboardClicked) {
+                releaseNoteEvent(key);
+            }
         });
     }
 }
