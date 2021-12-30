@@ -23,6 +23,7 @@ osc2.connect(ampEnv);
 osc3.connect(ampEnv);
 
 let isKeyboardClicked = false;
+let isKeyboardTouched = false;
 setKeyboardListeners();
 
 // When mouse leaves, reset click on keyboard even if the user is holding down the mouse
@@ -33,9 +34,7 @@ keyboard.addEventListener("mouseleave", () => {
 });
 
 // Main event to call for pressing keyboard note
-function pressNoteEvent(event, key) {
-    event.stopPropagation();
-
+function pressNoteEvent(key) {
     // Play note associated with key
     osc1.frequency.value = key.dataset.note 
         + (baseOctaveNum + osc1RangeOffset + parseInt(key.dataset.octave));
@@ -69,14 +68,33 @@ function setKeyboardListeners() {
             event.preventDefault();
         });
 
+        key.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if(!isKeyboardClicked && !isKeyboardTouched) {
+                Tone.start();
+                pressNoteEvent(key);
+                isKeyboardTouched = true;
+            }
+        });
+
+        key.addEventListener("touchend", (event) => {
+            event.preventDefault();
+            if(isKeyboardTouched) {
+                releaseNoteEvent(key);
+                isKeyboardTouched = false;
+            }
+        });
+
         key.addEventListener("mousedown", (event) => {
-            if(!isKeyboardClicked) {
-                pressNoteEvent(event, key);
+            event.stopPropagation();
+            if(!isKeyboardTouched && !isKeyboardClicked) {
+                pressNoteEvent(key);
                 isKeyboardClicked = true;
             }
         });
 
-        key.addEventListener("mouseup", (event) => {
+        key.addEventListener("mouseup", () => {
             if(isKeyboardClicked) {
                 releaseNoteEvent(key);
                 isKeyboardClicked = false;
@@ -84,13 +102,15 @@ function setKeyboardListeners() {
         });
 
         key.addEventListener("mouseover", (event) => {
+            event.stopPropagation();
             // Play note if mousing over a key while holding down the mouse on the keyboard
             if(isKeyboardClicked) {
-                pressNoteEvent(event, key);
+                pressNoteEvent(key);
             }
         });
 
         key.addEventListener("mouseout", (event) => {
+            event.stopPropagation();
             if(isKeyboardClicked) {
                 releaseNoteEvent(key);
             }
