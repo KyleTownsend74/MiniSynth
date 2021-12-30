@@ -1,7 +1,8 @@
 # MiniSynth
-Basic web based synthesizer.
 
 **MiniSynth** is a basic web based synthesizer that allows the user to synthesize their own sounds and play them via a digital keyboard. Inspired by the [Minimoog Model D](https://www.moogmusic.com/products/minimoog-model-d).
+
+The useable project can be found [here](https://kyletownsend74.github.io/MiniSynth/).
 
 ## Features
 
