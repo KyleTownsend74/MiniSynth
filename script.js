@@ -71,6 +71,8 @@ function setKeyboardListeners() {
         key.addEventListener("touchstart", (event) => {
             event.preventDefault();
             event.stopPropagation();
+
+            // Activate note if keyboard is not currently being interacted with
             if(!isKeyboardClicked && !isKeyboardTouched) {
                 Tone.start();
                 pressNoteEvent(key);
@@ -80,6 +82,8 @@ function setKeyboardListeners() {
 
         key.addEventListener("touchend", (event) => {
             event.preventDefault();
+
+            // Release note if keyboard was being interacted with via touch
             if(isKeyboardTouched) {
                 releaseNoteEvent(key);
                 isKeyboardTouched = false;
@@ -88,6 +92,8 @@ function setKeyboardListeners() {
 
         key.addEventListener("mousedown", (event) => {
             event.stopPropagation();
+
+            // Activate note if keyboard is not currently being interacted with
             if(!isKeyboardTouched && !isKeyboardClicked) {
                 pressNoteEvent(key);
                 isKeyboardClicked = true;
@@ -95,6 +101,7 @@ function setKeyboardListeners() {
         });
 
         key.addEventListener("mouseup", () => {
+            // Release note if keyboard was being interacted with via mouse
             if(isKeyboardClicked) {
                 releaseNoteEvent(key);
                 isKeyboardClicked = false;
@@ -111,6 +118,8 @@ function setKeyboardListeners() {
 
         key.addEventListener("mouseout", (event) => {
             event.stopPropagation();
+
+            // Release current note if mousing out of the key while interacting with the keyboard
             if(isKeyboardClicked) {
                 releaseNoteEvent(key);
             }
