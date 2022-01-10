@@ -33,6 +33,13 @@ keyboard.addEventListener("mouseleave", () => {
     }
 });
 
+// Do not keep keyboard clicked down if mouse up on keyboard border
+document.querySelector("#keyboard-border").addEventListener("mouseup", () => {
+    if(isKeyboardClicked) {
+        isKeyboardClicked = false;
+    }
+});
+
 // Main event to call for pressing keyboard note
 function pressNoteEvent(key) {
     // Play note associated with key
