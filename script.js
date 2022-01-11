@@ -1,28 +1,40 @@
 const keyboard = document.querySelector("#keyboard");
 const baseOctaveNum = 3;
-const osc1 = new Tone.Oscillator();
-const osc2 = new Tone.Oscillator();
-const osc3 = new Tone.Oscillator();
-const ampEnv = new Tone.AmplitudeEnvelope({
-    attack: 0,
-    decay: 0.01,    // Default at 0.01 to ensure decay activates when knob is fully down
-    sustain: 1,
-    release: 0.05   // Release at 0.05 to avoid bug and give smoother sound without dedicated knob
-}).toDestination();
+
+// ToneJS variables for playing and modifying sound
+let osc1;
+let osc2;
+let osc3;
+let ampEnv;
 
 // Offset for note range of each oscillator
 let osc1RangeOffset = 0;
 let osc2RangeOffset = 0;
 let osc3RangeOffset = 0;
 
-osc1.type = document.querySelector("#osc1-waveform").value;
-osc2.type = document.querySelector("#osc2-waveform").value;
-osc3.type = document.querySelector("#osc3-waveform").value;
-osc1.connect(ampEnv);
-osc2.connect(ampEnv);
-osc3.connect(ampEnv);
+// Initialize the ToneJS variables
+function initializeTone() {
+    osc1 = new Tone.Oscillator();
+    osc2 = new Tone.Oscillator();
+    osc3 = new Tone.Oscillator();
+
+    ampEnv = new Tone.AmplitudeEnvelope({
+        attack: 0,
+        decay: 0.01,    // Default at 0.01 to ensure decay activates when knob is fully down
+        sustain: 1,
+        release: 0.05   // Release at 0.05 to avoid bug and give smoother sound without dedicated knob
+    }).toDestination();
+
+    osc1.type = document.querySelector("#osc1-waveform").value;
+    osc2.type = document.querySelector("#osc2-waveform").value;
+    osc3.type = document.querySelector("#osc3-waveform").value;
+    osc1.connect(ampEnv);
+    osc2.connect(ampEnv);
+    osc3.connect(ampEnv);
+}
 
 document.querySelector("#intro-button").addEventListener("click", () => {
+    initializeTone();
     document.querySelector("#intro-layer").classList.add("removed");
 })
 
