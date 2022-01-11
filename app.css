@@ -195,6 +195,10 @@ div.separator {
         width: 525px;
         height: 100px;
     }
+
+    #intro-text {
+        width: 50%;
+    }
 }
 
 @media (max-width: 640px) {
@@ -208,5 +212,9 @@ div.separator {
     #keyboard {
         width: 315px;
         height: 60px;
+    }
+
+    #intro-text {
+        width: 75%;
     }
 }
