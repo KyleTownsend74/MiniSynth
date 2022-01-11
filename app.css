@@ -19,6 +19,61 @@ select {
     padding: 0.1em;
 }
 
+button {
+    background-color: black;
+    color: rgb(250, 222, 186);
+    border-radius: 0.25em;
+    border: 2px solid rgb(250, 222, 186);
+    transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+button:hover {
+    color: white;
+    border-color: white;
+}
+
+button.pressed {
+    color: rgb(168, 168, 168);
+    border-color: rgb(168, 168, 168);
+}
+
+#intro-layer {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+    /* Ignore body margin and padding */
+    top: 0px;
+    left: 0px;
+}
+
+#intro-text {
+    width: 30%;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin: 0 auto;
+}
+
+#intro-button {
+    display: block;
+    width: 90px;
+    height: 30px;
+    margin: 0 auto;
+    font-family: inherit;
+}
+
+#intro-layer #intro-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.removed {
+    display: none;
+}
+
 #keyboard {
     width: 840px;
     height: 160px;
@@ -96,23 +151,8 @@ select {
 }
 
 .knob-button {
-    background-color: black;
-    color: rgb(250, 222, 186);
     font-size: 30px;
-    border-radius: 0.25em;
-    border: 2px solid rgb(250, 222, 186);
-    transition: color 0.15s ease-out, border-color 0.15s ease-out;
     margin: 0 5px;
-}
-
-.knob-button:hover {
-    color: white;
-    border-color: white;
-}
-
-.knob-button.pressed {
-    color: rgb(168, 168, 168);
-    border-color: rgb(168, 168, 168);
 }
 
 div.container {

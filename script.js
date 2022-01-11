@@ -22,6 +22,10 @@ osc1.connect(ampEnv);
 osc2.connect(ampEnv);
 osc3.connect(ampEnv);
 
+document.querySelector("#intro-button").addEventListener("click", () => {
+    document.querySelector("#intro-layer").classList.add("removed");
+})
+
 let isKeyboardClicked = false;
 let isKeyboardTouched = false;
 setKeyboardListeners();
