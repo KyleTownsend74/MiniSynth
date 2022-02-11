@@ -151,8 +151,15 @@ button.pressed {
 }
 
 .knob-button {
+    padding: 0;
+    width: 43px;
+    height: 43px;
     font-size: 30px;
     margin: 0 5px;
+}
+
+.knob h4 {
+    text-align: center;
 }
 
 div.container {
